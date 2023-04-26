@@ -21,7 +21,7 @@ void showWord(unsigned int);
 // ConsoleOutputFunc Matrix (dạng string)
 void showMatrix(unsigned int);
 // ReturnOutputFunc.
-string matrixToStr(unsigned int* word);
+string matrixToStr(unsigned int *word);
 string wordToStr(unsigned int);
 // Dịch vòng trái 1 Byte.
 unsigned int rotWord(unsigned int);
@@ -85,12 +85,12 @@ int main()
 		cout << "Enter the value of the security key (The length of the Cipher Key in AES can be 128 bits, 192 bits, or 256 bits, which is equivalent to 16 bytes, 24 bytes, or 32 bytes; If the security key is not long enough, which is 16 bytes, the system will automatically add 0x00 to make up for it):" << endl;
 		getline(cin, cipherKey);
 		cipherKey.erase(remove(cipherKey.begin(), cipherKey.end(), ' '), cipherKey.end());
-		if (cipherKey.length() < 32) {
+		if (cipherKey.length() < 32)
+		{
 			int diff = 32 - cipherKey.length();
 			string zeros(diff, '0');
 			cipherKey += zeros;
 		}
-		cout << cipherKey << endl;
 	} while (cipherKey.length() != 32);
 
 	unsigned int *state = new unsigned int[4];
@@ -101,10 +101,11 @@ int main()
 	//	state[0] = 0x3243f6a8; state[1] = 0x885a308d; state[2] = 0x313198a2; state[3] = 0xe0370734;
 	//	key[0] = 0x2B7E1516; key[1] = 0x28AED2A6; key[2] = 0xABF71588, key[3] = 0x09CF4F3C;
 
+	cout << endl;
+
 	unsigned int *Cipher = EncryptionAES(state, key);
 	unsigned int *Decipher = DecryptionAES(Cipher, key);
 
-	cout << endl;
 	cout << "Encrypt String: " << matrixToStr(Cipher) << endl;
 	cout << "Decrypt String: " << matrixToStr(Decipher) << endl;
 }
@@ -123,7 +124,8 @@ string wordToStr(unsigned int word)
 	return hexanString;
 }
 
-void showWord(unsigned int word) {
+void showWord(unsigned int word)
+{
 	for (int i = 1; i <= 8; i++)
 	{
 		unsigned int hexan = (word >> (32 - i * 4)) & 0xF;
@@ -310,7 +312,8 @@ void showMatrix(unsigned int word[4])
 	}
 }
 
-string matrixToStr(unsigned int * word) {
+string matrixToStr(unsigned int *word)
+{
 	string str = "";
 	// show matrix
 	for (int i = 0; i < 4; i++)
